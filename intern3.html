@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Calculator</title>
+    <style>
+        /* Overall body styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #e6e6e6;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        /* Calculator container styling */
+        .calculator-container {
+            display: grid;
+            grid-template-columns: repeat(4, 70px);
+            grid-template-rows: minmax(100px, auto) repeat(5, 70px);
+            gap: 10px;
+            padding: 20px;
+            background-color: #3333ff;
+            border-radius: 12px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Display styling */
+        #output {
+            grid-column: span 4;
+            background-color: #ffffff;
+            border: none;
+            padding: 20px;
+            font-size: 1.8em;
+            color: #222;
+            text-align: right;
+            border-radius: 8px;
+        }
+
+        /* Button styling */
+        .btn {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 1.4em;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:active {
+            background-color: #cccccc;
+        }
+
+        .btn-operator {
+            background-color: #ffaa00;
+            color: #fff;
+        }
+
+        .btn-equal {
+            background-color: #00cc44;
+            color: #fff;
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <!-- Display -->
+        <input type="text" id="output" disabled>
+        
+        <!-- Calculator Buttons -->
+        <button class="btn" onclick="resetDisplay()">C</button>
+        <button class="btn btn-operator" onclick="addValue('/')">/</button>
+        <button class="btn btn-operator" onclick="addValue('*')">*</button>
+        <button class="btn btn-operator" onclick="addValue('-')">-</button>
+        <button class="btn" onclick="addValue('7')">7</button>
+        <button class="btn" onclick="addValue('8')">8</button>
+        <button class="btn" onclick="addValue('9')">9</button>
+        <button class="btn btn-operator" onclick="addValue('+')">+</button>
+        <button class="btn" onclick="addValue('4')">4</button>
+        <button class="btn" onclick="addValue('5')">5</button>
+        <button class="btn" onclick="addValue('6')">6</button>
+        <button class="btn" onclick="addValue('1')">1</button>
+        <button class="btn" onclick="addValue('2')">2</button>
+        <button class="btn" onclick="addValue('3')">3</button>
+        <button class="btn btn-equal" onclick="computeResult()">=</button>
+        <button class="btn" onclick="addValue('0')">0</button>
+        <button class="btn" onclick="addValue('.')">.</button>
+    </div>
+
+    <script>
+        // Function to add clicked button value to the display
+        function addValue(value) {
+            document.getElementById('output').value += value;
+        }
+
+        // Function to clear the display
+        function resetDisplay() {
+            document.getElementById('output').value = '';
+        }
+
+        // Function to calculate the result
+        function computeResult() {
+            try {
+                let calculation = eval(document.getElementById('output').value);
+                document.getElementById('output').value = calculation;
+            } catch (e) {
+                document.getElementById('output').value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
